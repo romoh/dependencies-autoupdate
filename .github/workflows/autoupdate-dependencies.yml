@@ -1,0 +1,30 @@
+name: Auto update dependencies
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the head commit of the branch
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+            
+    - name: Run auto dependency update 
+      working-directory: ./test/rust
+      uses: ./action.yml
+      with: 
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repo: "dependencies-autoupdate"
+        update-command: "'cargo update && cargo test'" 
+        username: "romoh"
+        organization: "romoh"
+        
