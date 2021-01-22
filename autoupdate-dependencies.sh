@@ -15,16 +15,13 @@ if [ -z "$token" ]; then
     exit 1
 fi
 
-if [ -z "$organization" ]; then
-    echo "organization is not defined, defaulting to $username"
+if [ -n "$update_path" ]; then
+    # if path is set, use that. otherwise default to current working directory
+    cd (($update_path))
 fi
 
-# if [ -n "$PATH" ]; then
-#      cd './test/rust' #TODO: Use from parameter
-# fi
-
 echo "Switched to $update_path"
-cd './test/rust'
+cd './test/go'
 
 # assumes the repo is already cloned as a prerequisite for running the script
 
