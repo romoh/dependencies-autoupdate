@@ -3,20 +3,15 @@
 TOKEN=$1
 REPO=$2
 UPDATE_COMMAND=$3
-PATH=$4
-USERNAME=$5
-ORGANIZATION=$6
+#PATH=$4
+USERNAME=$4
+ORGANIZATION=$5
 
 BRANCH_NAME="automated-dependencies-update"
 EMAIL="noreply@github.com"
 
-function switch-directory() {
-    echo "Switched to $1"
-    cd $1
-}
-
 if [ -z "$TOKEN" ]; then
-    echo "TOKEN is not defined"
+    echo "Token is not defined"
     exit 1
 fi
 
@@ -25,15 +20,11 @@ if [ -z "$ORGANIZATION" ]; then
     ORGANIZATION=USERNAME
 fi
 
-if [ -z "$USERNAME" ]; then
-    echo "Username is not defined, defaulting to 'GitHub'"
-    USERNAME="GitHub"
-fi
-
 # if [ -n "$PATH" ]; then
 #      cd './test/rust' #TODO: Use from parameter
 # fi
 
+#echo "Switched to $PATH"
 cd './test/rust'
 
 # assumes the repo is already cloned as a prerequisite for running the script
@@ -41,8 +32,9 @@ cd './test/rust'
 # check if branch already exists
 if [ "git branch --list $BRANCH_NAME" ]
 then
-    echo "Branch name $BRANCH_NAME already exists."
+    echo "Branch name $BRANCH_NAME already exists"
 
+    echo "Check out branch instead" 
     # check out existing branch
     git checkout $BRANCH_NAME
 
