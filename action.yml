@@ -22,5 +22,5 @@ inputs:
 runs:
   using: 'composite'
   steps:
-     - run: ./autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.repo }} ${{ inputs.update-command }} ${{ inputs.path }} ${{ inputs.username }} ${{ inputs.organization }}
+     - run: ./autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.repo }} ${{ inputs.update-command }} ${{ inputs.username }} ${{ inputs.organization }}
        shell: bash

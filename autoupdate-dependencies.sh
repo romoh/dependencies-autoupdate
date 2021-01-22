@@ -3,9 +3,9 @@
 TOKEN=$1
 REPO=$2
 UPDATE_COMMAND=$3
-PATH=$4
-USERNAME=$5
-ORGANIZATION=$6
+#PATH=$4
+USERNAME=$4
+ORGANIZATION=$5
 
 BRANCH_NAME="automated-dependencies-update"
 EMAIL="noreply@github.com"
@@ -31,6 +31,9 @@ if [ -n "$PATH" ]; then
 fi
 
 cd "./test/rust"
+
+# check if branch already exists
+# git ls-remote --heads git@github.com:user/repo.git branch-name
 
 # assumes the repo is already cloned as a prerequisite for running the script
 git checkout -b $BRANCH_NAME
