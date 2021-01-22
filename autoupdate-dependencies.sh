@@ -3,7 +3,7 @@
 TOKEN=$1
 REPO=$2
 UPDATE_COMMAND=$3
-#PATH=$4
+PATH="./test/rust"
 USERNAME=$4
 ORGANIZATION=$5
 
@@ -33,7 +33,7 @@ fi
 cd "./test/rust"
 
 # check if branch already exists
-# git ls-remote --heads git@github.com:user/repo.git branch-name
+git ls-remote --heads git@github.com:$USERNAME/$REPO.git $BRANCH_NAME
 
 # assumes the repo is already cloned as a prerequisite for running the script
 git checkout -b $BRANCH_NAME
