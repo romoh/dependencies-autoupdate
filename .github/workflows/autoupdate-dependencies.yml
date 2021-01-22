@@ -1,9 +1,5 @@
 name: Auto update rust dependencies
 
-defaults:
-  run:
-    working-directory: test/rust
-
 on:
   schedule:
     - cron: '0 0 * * *'
@@ -14,6 +10,9 @@ env:
 
 jobs:
   auto-update:
+    defaults:
+      run:
+        working-directory: test/rust
     runs-on: ubuntu-latest
 
     steps:    
