@@ -30,7 +30,7 @@ cd './test/rust'
 # assumes the repo is already cloned as a prerequisite for running the script
 
 # check if branch already exists
-if [ "git branch --list $branch_name" ]
+if [ git branch --list $branch_name ]
 then
     echo "Branch name $branch_name already exists"
 
@@ -78,3 +78,4 @@ then
         echo "Pull request already opened. Update existing instead."
         #TODO
     fi
+fi
