@@ -23,7 +23,9 @@ jobs:
         persist-credentials: false
           
     - name: Rust tools
-      uses: actions-rs/install@v0.1
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
              
     - name: Run auto dependency update 
       uses: romoh/dependencies-autoupdate@main
