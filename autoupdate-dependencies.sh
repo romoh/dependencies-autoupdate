@@ -30,8 +30,6 @@ if [ -n "$PATH" ]; then
     cd $PATH
 fi
 
-cd "./test/rust"
-
 # check if branch already exists
 git ls-remote --heads git@github.com:$USERNAME/$REPO.git $BRANCH_NAME
 
