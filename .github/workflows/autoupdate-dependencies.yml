@@ -20,7 +20,7 @@ jobs:
             
     - name: Run auto dependency update 
       working-directory: ./test/rust
-      uses: ./action.yml
+      uses: ./autoupdate-action
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
         repo: "dependencies-autoupdate"
