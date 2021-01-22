@@ -28,7 +28,6 @@ fi
 # assumes the repo is already cloned as a prerequisite for running the script
 git checkout -b $BRANCH_NAME
 
-echo $PWD
 cd $PATH
 
 echo "Running update command $UPDATE_COMMAND"
