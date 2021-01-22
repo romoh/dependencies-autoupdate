@@ -27,14 +27,21 @@ fi
 
 if [ -n "$PATH" ]; then
     echo "Switched to $PATH"
-    cd $PATH
+    cd "./test/rust"
 fi
 
-# check if branch already exists
-git ls-remote --heads git@github.com:$USERNAME/$REPO.git $BRANCH_NAME
-
 # assumes the repo is already cloned as a prerequisite for running the script
-git checkout -b $BRANCH_NAME
+
+# check if branch already exists
+if [ `git branch --list $BRANCH_NAME` ]
+then
+    echo "Branch name $BRANCH_NAME already exists."
+
+    # in this case, rebase and update the existing branch
+    # TODO
+else
+    git checkout -b $BRANCH_NAME
+fi
 
 echo "Running update command $UPDATE_COMMAND"
 eval $UPDATE_COMMAND
