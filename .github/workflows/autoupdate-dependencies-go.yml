@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  auto-update-rust:
+  auto-update-go:
     runs-on: ubuntu-latest
 
     steps:    
@@ -20,7 +20,7 @@ jobs:
         persist-credentials: false
           
     - name: Go setup
-      uses: actions/setup-go@v2e
+      uses: actions/setup-go@v2
              
     - name: Run auto dependency update 
       uses: romoh/dependencies-autoupdate@main
