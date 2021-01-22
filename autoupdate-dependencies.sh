@@ -27,13 +27,13 @@ fi
 
 if [ -n "$PATH" ]; then
     echo "Switched to $PATH"
-    cd "./test/rust"
+    cd "'./test/rust'"
 fi
 
 # assumes the repo is already cloned as a prerequisite for running the script
 
 # check if branch already exists
-if [ `git branch --list $BRANCH_NAME` ]
+if [ "git branch --list $BRANCH_NAME" ]
 then
     echo "Branch name $BRANCH_NAME already exists."
 

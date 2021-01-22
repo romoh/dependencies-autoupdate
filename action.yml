@@ -7,9 +7,6 @@ inputs:
   repo:
     description: Name of the repo
     required: true
-  path:
-    description: Path to directory to run the update-command
-    required: true
   update-command:
     description: Command to update dependencies and do initial checks
     required: true
