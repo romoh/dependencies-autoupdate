@@ -27,7 +27,7 @@ fi
 
 if [ -n "$PATH" ]; then
      echo "Switched to $PATH"
-     cd $(echo $PATH | tr -d '\r')
+     cd "${PATH}"
 fi
 
 # assumes the repo is already cloned as a prerequisite for running the script
