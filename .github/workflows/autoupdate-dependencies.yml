@@ -23,7 +23,7 @@ jobs:
         persist-credentials: false
             
     - name: Run auto dependency update 
-      uses: ./auto-update-dependencies
+      uses: ./autoupdate-dependencies
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
         repo: "dependencies-autoupdate"
