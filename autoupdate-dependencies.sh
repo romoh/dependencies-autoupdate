@@ -29,7 +29,10 @@ cd './test/rust'
 
 # assumes the repo is already cloned as a prerequisite for running the script
 
-# check if branch already exists
+# fetch first to be able to detect if branch already exists 
+git fetch
+
+# branch already exists, previous opened PR was not merged
 if [ git branch --list $branch_name ]
 then
     echo "Branch name $branch_name already exists"
@@ -75,7 +78,10 @@ then
     echo $response   
     
     if [[ "$response" == *"already exist"* ]]; then
-        echo "Pull request already opened. Update existing instead."
-        #TODO
+        echo "Pull request already opened. Updates were pushed to the existing PR instead"
+        exit 0
     fi
+else
+    echo "No dependencies updates were detected"
+    exit 0
 fi
