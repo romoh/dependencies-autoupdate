@@ -28,7 +28,7 @@ fi
 # assumes the repo is already cloned as a prerequisite for running the script
 git checkout -b $BRANCH_NAME
 
-cd $PATH
+cd '.\test\rust'
 
 echo "Running update command $UPDATE_COMMAND"
 eval $UPDATE_COMMAND
