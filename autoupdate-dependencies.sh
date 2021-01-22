@@ -3,9 +3,8 @@
 TOKEN=$1
 REPO=$2
 UPDATE_COMMAND=$3
-PATH=$4
-USERNAME=$5
-ORGANIZATION=$6
+USERNAME=$4
+ORGANIZATION=$5
 
 BRANCH_NAME="automated-dependencies-update"
 EMAIL="noreply@github.com"
