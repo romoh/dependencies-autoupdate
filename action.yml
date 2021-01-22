@@ -1,0 +1,23 @@
+name: 'autoupdate-dependencies'
+description: 'Automatic dependencies update'
+inputs:
+  token:
+    description: Token used to send pull requests
+    required: true
+  repo:
+    description: Name of the repo
+    required: true
+  update-command:
+    description: Command to update dependencies and do initial checks
+    required: true
+  username:
+    description: Username, if not defined default is used.
+    required: true
+  organization:
+    description: Organization owning the repo. For individuals that will be the username
+    required: false
+runs:
+  using: 'composite'
+  steps:
+     - run: ./scripts/auto-update-dependencies.sh ${{ inputs.token }} ${{ inputs.repo }} ${{ inputs.update-command }} ${{ inputs.username }} ${{ inputs.organization }}
+       shell: bash
