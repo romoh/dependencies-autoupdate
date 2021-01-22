@@ -3,7 +3,7 @@
 TOKEN=$1
 REPO=$2
 UPDATE_COMMAND=$3
-PATH='./test/rust'
+update-path='./test/rust'
 USERNAME=$4
 ORGANIZATION=$5
 
