@@ -25,10 +25,10 @@ if [ -z "$USERNAME" ]; then
     USERNAME="GitHub"
 fi
 
-if [ -n "$PATH" ]; then
-    echo "Switched to $PATH"
-    cd "'./test/rust'"
-fi
+# if [ -n "$PATH" ]; then
+#     echo "Switched to $PATH"
+#     cd "'./test/rust'"
+# fi
 
 # assumes the repo is already cloned as a prerequisite for running the script
 
