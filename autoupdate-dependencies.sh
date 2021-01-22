@@ -3,7 +3,7 @@
 TOKEN=$1
 REPO=$2
 UPDATE_COMMAND=$3
-#PATH="'test/rust'"
+PATH='./test/rust'
 USERNAME=$4
 ORGANIZATION=$5
 
@@ -27,7 +27,7 @@ fi
 
 if [ -n "$PATH" ]; then
      echo "Switched to $PATH"
-     cd './test/rust'  #"${PATH}"
+     cd ${PATH}
 fi
 
 # assumes the repo is already cloned as a prerequisite for running the script
