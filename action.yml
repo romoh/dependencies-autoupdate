@@ -7,6 +7,9 @@ inputs:
   repo:
     description: Name of the repo
     required: true
+  path:
+    description: Path to directory to run the update-command
+    required: true
   update-command:
     description: Command to update dependencies and do initial checks
     required: true
@@ -19,5 +22,5 @@ inputs:
 runs:
   using: 'composite'
   steps:
-     - run: ./autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.repo }} ${{ inputs.update-command }} ${{ inputs.username }} ${{ inputs.organization }}
+     - run: ./autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.repo }} ${{ inputs.update-command }} ${{ inputs.path }} ${{ inputs.username }} ${{ inputs.organization }}
        shell: bash

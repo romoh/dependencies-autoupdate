@@ -3,9 +3,9 @@
 TOKEN=$1
 REPO=$2
 UPDATE_COMMAND=$3
-PATH='./test/rust'
-USERNAME=$4
-ORGANIZATION=$5
+PATH=$4
+USERNAME=$5
+ORGANIZATION=$6
 
 BRANCH_NAME="automated-dependencies-update"
 EMAIL="noreply@github.com"
@@ -31,7 +31,7 @@ if [ -z "$USERNAME" ]; then
 fi
 
 if [ -n "$PATH" ]; then
-     pushd "$PATH"
+     pushd './test/rust' #TODO: Use from parameter
 fi
 
 # assumes the repo is already cloned as a prerequisite for running the script
@@ -41,8 +41,11 @@ if [ "git branch --list $BRANCH_NAME" ]
 then
     echo "Branch name $BRANCH_NAME already exists."
 
-    # in this case, rebase and update the existing branch
-    # TODO
+    # check out existing branch
+    git checkout $BRANCH_NAME
+
+    # reset with latest from main
+    git reset --hard origin/main
 else
     git checkout -b $BRANCH_NAME
 fi
