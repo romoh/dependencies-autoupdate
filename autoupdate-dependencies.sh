@@ -28,7 +28,7 @@ fi
 git checkout -b $BRANCH_NAME
 
 PATH='./test/rust' 
-cd $PATH
+eval cd $PATH
 
 echo "Running update command $UPDATE_COMMAND"
 eval $UPDATE_COMMAND
