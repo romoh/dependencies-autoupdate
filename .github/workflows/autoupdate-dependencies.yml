@@ -16,12 +16,14 @@ jobs:
   auto-update:
     runs-on: ubuntu-latest
 
-    steps:
+    steps:    
     - name: Checkout the head commit of the branch
-      - uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-      - uses: actions-rs/install@v0.1
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+          
+    - name: Rust tools
+      uses: actions-rs/install@v0.1
              
     - name: Run auto dependency update 
       uses: romoh/dependencies-autoupdate@main
