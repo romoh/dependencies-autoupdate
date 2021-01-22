@@ -43,8 +43,8 @@ Note: If you want pull requests created by this action to trigger an on: push or
 Name |	Description	| Default
 --| --| --|
 token |	GITHUB_TOKEN or a repo scoped Personal Access Token (PAT). | GITHUB_TOKEN
-repo	| The name of the repo.	N/A
-update-command | The command to update the dependencies and validation commands for validating successful update. N/A
+repo	| The name of the repo. |	N/A
+update-command | The command to update the dependencies and validation commands for validating successful update. } N/A
 
 # Action outputs
 - Success: success means that the action completed successfully. If no dependencies updates were observed, the action is completed. If changes were detected, a pull request will be open.
