@@ -33,13 +33,15 @@ cd './test/rust'
 git fetch
 
 # branch already exists, previous opened PR was not merged
-if [ git branch --list $branch_name ]
+if [ -n "git branch --list $branch_name" ]
 then
     echo "Branch name $branch_name already exists"
 
     echo "Check out branch instead" 
     # check out existing branch
     git checkout $branch_name
+
+    git pull
 
     # reset with latest from main
     git reset --hard origin/main
