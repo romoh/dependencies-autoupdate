@@ -30,9 +30,11 @@ if [ -z "$USERNAME" ]; then
     USERNAME="GitHub"
 fi
 
-if [ -n "$PATH" ]; then
-     pushd './test/rust' #TODO: Use from parameter
-fi
+# if [ -n "$PATH" ]; then
+#      cd './test/rust' #TODO: Use from parameter
+# fi
+
+cd './test/rust'
 
 # assumes the repo is already cloned as a prerequisite for running the script
 
