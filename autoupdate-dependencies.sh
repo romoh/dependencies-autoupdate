@@ -31,7 +31,7 @@ if [ -z "$USERNAME" ]; then
 fi
 
 if [ -n "$PATH" ]; then
-     switch-directory("$PATH")
+     switch-directory "$PATH"
 fi
 
 # assumes the repo is already cloned as a prerequisite for running the script
