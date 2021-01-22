@@ -3,8 +3,9 @@
 TOKEN=$1
 REPO=$2
 UPDATE_COMMAND=$3
-USERNAME=$4
-ORGANIZATION=$5
+PATH=$4
+USERNAME=$5
+ORGANIZATION=$6
 
 BRANCH_NAME="automated-dependencies-update"
 EMAIL="noreply@github.com"
@@ -24,10 +25,13 @@ if [ -z "$USERNAME" ]; then
     USERNAME="GitHub"
 fi
 
+if [ -n "$PATH" ]; then
+    echo "Switched to $PATH"
+    cd $PATH
+fi
+
 # assumes the repo is already cloned as a prerequisite for running the script
 git checkout -b $BRANCH_NAME
-
-cd './test/rust'
 
 echo "Running update command $UPDATE_COMMAND"
 eval $UPDATE_COMMAND
