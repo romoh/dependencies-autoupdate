@@ -17,6 +17,8 @@ fi
 
 if [ -n "$update_path" ]; then
     # if path is set, use that. otherwise default to current working directory
+    echo "Change directory to $update_path"
+
     # TODO cd ${update_path}
 fi
 
