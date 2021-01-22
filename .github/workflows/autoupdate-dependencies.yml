@@ -10,9 +10,9 @@ env:
 
 jobs:
   auto-update:
-    defaults:
-      run:
-        working-directory: test/rust
+    # defaults:
+    #   run:
+    #     working-directory: test/rust
     runs-on: ubuntu-latest
 
     steps:    
