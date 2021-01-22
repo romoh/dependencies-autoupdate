@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  auto-update-rust:
+  auto-update-rust-dependencies:
     runs-on: ubuntu-latest
 
     steps:    

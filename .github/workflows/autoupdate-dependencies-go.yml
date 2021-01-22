@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  auto-update-go:
+  auto-update-go-dependencies:
     runs-on: ubuntu-latest
 
     steps:    

@@ -17,11 +17,11 @@ fi
 
 if [ -n "$update_path" ]; then
     # if path is set, use that. otherwise default to current working directory
-    cd (($update_path))
+    cd ${update_path}
 fi
 
 echo "Switched to $update_path"
-cd './test/go'
+#cd './test/go'
 
 # assumes the repo is already cloned as a prerequisite for running the script
 
