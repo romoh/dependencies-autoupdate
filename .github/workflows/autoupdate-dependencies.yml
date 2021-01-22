@@ -1,4 +1,8 @@
-name: Auto update dependencies
+name: Auto update rust dependencies
+
+defaults:
+  run:
+    working-directory: ./test/rust
 
 on:
   schedule:
@@ -19,7 +23,6 @@ jobs:
         persist-credentials: false
             
     - name: Run auto dependency update 
-      working-directory: ./test/rust
       uses: ./autoupdate-action
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
