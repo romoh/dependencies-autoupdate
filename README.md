@@ -34,6 +34,7 @@ jobs:
         repo: "akri"
         update-command: "'cargo update && cargo test'" 
         '
+It is recommended to use this action on a [schedule trigger](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule) at certain cadence, but it can be used on other triggers as well. Just note GitHub has limitation on token access from fork repos.
 
 # Action inputs
 All inputs are optional. If not set, sensible defaults will be used.
