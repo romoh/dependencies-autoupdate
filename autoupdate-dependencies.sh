@@ -3,7 +3,6 @@
 TOKEN=$1
 REPO=$2
 UPDATE_COMMAND=$3
-PATH="./test/rust"
 USERNAME=$4
 ORGANIZATION=$5
 
@@ -25,23 +24,10 @@ if [ -z "$USERNAME" ]; then
     USERNAME="GitHub"
 fi
 
-if [ -n "$PATH" ]; then
-     echo "Switched to $PATH"
-     cd './test/rust'
-fi
-
 # assumes the repo is already cloned as a prerequisite for running the script
+git checkout -b $BRANCH_NAME
 
-# check if branch already exists
-if [ "git branch --list $BRANCH_NAME" ]
-then
-    echo "Branch name $BRANCH_NAME already exists."
-
-    # in this case, rebase and update the existing branch
-    # TODO
-else
-    git checkout -b $BRANCH_NAME
-fi
+cd './test/rust'
 
 echo "Running update command $UPDATE_COMMAND"
 eval $UPDATE_COMMAND
