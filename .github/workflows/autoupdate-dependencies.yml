@@ -30,7 +30,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         repo: "dependencies-autoupdate"
         update-command: "'cargo update && cargo test'"
-        #path: "'./test/rust'"
+        path: "'./test/rust'"
         username: "romoh"
         organization: "romoh"
         

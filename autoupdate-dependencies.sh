@@ -3,9 +3,9 @@
 token=$1
 repo=$2
 update_command=$3
-update_path='./test/rust'
-username=$4
-organization=$5
+update_path=$4
+username=$5
+organization=${6:-$(username)}
 
 branch_name="automated-dependencies-update-"
 email="noreply@github.com"
@@ -17,7 +17,6 @@ fi
 
 if [ -z "$organization" ]; then
     echo "organization is not defined, defaulting to $username"
-    organization=username
 fi
 
 # if [ -n "$PATH" ]; then
@@ -40,7 +39,6 @@ then
     echo "Check out branch instead" 
     # check out existing branch
     git checkout $branch_name
-
     git pull
 
     # reset with latest from main
@@ -67,7 +65,7 @@ then
     git commit -a -m "Auto-update cargo crates"
     
     # push the changes
-    git push authenticated $branch_name
+    git push authenticated $branch_name -f
 
     echo "https://api.github.com/repos/$organization/$repo/pulls"
 
