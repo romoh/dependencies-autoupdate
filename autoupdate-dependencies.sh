@@ -10,6 +10,11 @@ ORGANIZATION=$5
 BRANCH_NAME="automated-dependencies-update"
 EMAIL="noreply@github.com"
 
+function switch-directory() {
+    echo "Switched to $1"
+    cd $1
+}
+
 if [ -z "$TOKEN" ]; then
     echo "TOKEN is not defined"
     exit 1
@@ -26,8 +31,7 @@ if [ -z "$USERNAME" ]; then
 fi
 
 if [ -n "$PATH" ]; then
-     echo "Switched to $PATH"
-     eval "cd $PATH"
+     switch-directory("$PATH")
 fi
 
 # assumes the repo is already cloned as a prerequisite for running the script
