@@ -23,7 +23,7 @@ jobs:
         persist-credentials: false
             
     - name: Run auto dependency update 
-      uses: dependencies-autoupdate/autoupdate-dependencies@main
+      uses: romoh/dependencies-autoupdate@main
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
         repo: "dependencies-autoupdate"
