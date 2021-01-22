@@ -30,6 +30,8 @@ if [ -n "$PATH" ]; then
     cd $PATH
 fi
 
+cd "./test/rust"
+
 # assumes the repo is already cloned as a prerequisite for running the script
 git checkout -b $BRANCH_NAME
 
