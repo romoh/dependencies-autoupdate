@@ -2,7 +2,7 @@ name: Auto update rust dependencies
 
 defaults:
   run:
-    working-directory: ./test/rust
+    working-directory: test/rust
 
 on:
   schedule:
