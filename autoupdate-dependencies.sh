@@ -14,7 +14,7 @@ if [ -z "$token" ]; then
     exit 1
 fi
 
-if [ -z "$update_command"]; then
+if [ -z "$update_command" ]; then
     echo "update-command cannot be empty"
     exit 1
 fi
