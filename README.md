@@ -24,7 +24,7 @@ jobs:
       uses: actions/setup-go@v2
              
     - name: Run auto dependency update 
-      uses: romoh/dependencies-autoupdate@main
+      uses: romoh/dependencies-autoupdate@v1
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
         update-command: "'go get -u && go mod tidy && go build'"
