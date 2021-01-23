@@ -26,9 +26,5 @@ jobs:
       uses: romoh/dependencies-autoupdate@main
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
-        repo: "dependencies-autoupdate"
         update-command: "'go get -u && go run'"
-        path: "'./test/go'"
-        username: "romoh"
-        organization: "romoh"
-        
+        update-path: "'./test/go'"
