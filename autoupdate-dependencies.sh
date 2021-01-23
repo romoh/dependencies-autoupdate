@@ -64,11 +64,11 @@ then
     # format: https://[username]:[token]@github.com/[organization]/[repo].git
     git remote add authenticated "https://$username:$token@github.com/$repo.git"
 
-    # commit the changes to Cargo.lock
-    git commit -a -m "Auto-update cargo crates"
+    # commit the changes to updated files
+    git commit -a -m "Auto-updated dependencies"
     
     # push the changes
-    git push authenticated $branch_name -f
+    git push authenticated -f
 
     echo "https://api.github.com/repos/$repo/pulls"
 
