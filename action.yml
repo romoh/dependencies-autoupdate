@@ -1,7 +1,8 @@
 name: 'autoupdate-dependencies'
 description: 'Automatic dependencies update'
-icon: arrow-up-circle
-color: green
+branding:
+  icon: 'arrow-up-circle'  
+  color: 'green'
 inputs:
   token:
     description: Token used to send pull requests
