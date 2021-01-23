@@ -26,7 +26,7 @@ if [ -n "$update_path" ]; then
 fi
 
 echo "Switched to $update_path"
-cd './test/go'
+cd "$update_path"
 
 # assumes the repo is already cloned as a prerequisite for running the script
 
