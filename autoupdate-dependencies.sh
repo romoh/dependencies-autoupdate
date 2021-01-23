@@ -33,14 +33,14 @@ cd './test/go'
 # fetch first to be able to detect if branch already exists 
 git fetch
 
-branch_exists=git branch --list automated-dependencies-update
-branch_exists2= [! -z "git branch --list $branch_name"]
-branch_exists3= [-n "git branch --list $branch_name"]
+branch_exists=$(git branch --list automated-dependencies-update)
+branch_exists4=$(git branch --list automated-dependencies-update 2>&1)
 
 echo "*****************"
 echo $branch_exists
-echo $branch_exists2
-echo $branch_exists3
+[ ! -z "$branch_exists" ] && echo "yes"
+[ -n "$branch_exists"] && echo "yes"
+echo $branch_exists4
 echo "*****************"
 
 # branch already exists, previous opened PR was not merged
