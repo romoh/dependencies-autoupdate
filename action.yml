@@ -16,5 +16,5 @@ inputs:
 runs:
   using: 'composite'
   steps:
-     - run: /.autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.update-command }} ${{ inputs.update-path }}
+     - run: ${{ github.action_path }}/autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.update-command }} ${{ inputs.update-path }}
        shell: bash
