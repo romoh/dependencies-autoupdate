@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# fail as soon as any command errors
+set -e
+
 token=$1
 update_command=$2
 update_path=$3
@@ -22,11 +25,8 @@ fi
 if [ -n "$update_path" ]; then
     # if path is set, use that. otherwise default to current working directory
     echo "Change directory to $update_path"
-    # TODO cd ${update_path}
+    cd "$update_path"
 fi
-
-echo "Switched to $update_path"
-cd "$update_path"
 
 # assumes the repo is already cloned as a prerequisite for running the script
 
@@ -44,12 +44,7 @@ else
 
     # check out existing branch
     echo "Check out branch instead" 
-    result=$(git checkout $branch_name 2>&1)
-    if [ -n "$result" ]; then
-        echo "git checkout failed"
-        exit 1
-    fi
-    
+    git checkout $branch_name
     git pull
 
     # reset with latest from main
