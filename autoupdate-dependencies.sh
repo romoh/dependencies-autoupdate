@@ -34,8 +34,8 @@ cd './test/go'
 git fetch
 
 branch_exists=git branch --list automated-dependencies-update
-branch_exists2=! -z "git branch --list $branch_name"
-branch_exists3= -n "git branch --list $branch_name"
+branch_exists2= [! -z "git branch --list $branch_name"]
+branch_exists3= [-n "git branch --list $branch_name"]
 
 echo "*****************"
 echo $branch_exists
