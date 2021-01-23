@@ -34,24 +34,18 @@ cd './test/go'
 git fetch
 
 branch_exists=$(git branch --list automated-dependencies-update)
-branch_exists4=$(git branch --list automated-dependencies-update 2>&1)
-
-echo "*****************"
-echo $branch_exists
-[ -z "$branch_exists" ] && echo "yes"
-[ -n "$branch_exists" ] && echo "no"
-echo $branch_exists4
-echo "*****************"
 
 # branch already exists, previous opened PR was not merged
-if [ ${#branch_exists} == 0 ]
-then
+if [ -z "$branch_exists" ]; then
+    # create new branch
+    git checkout -b $branch_name
+else
     echo "Branch name $branch_name already exists"
 
-    echo "Check out branch instead" 
     # check out existing branch
+    echo "Check out branch instead" 
     result=$(git checkout $branch_name 2>&1)
-    if [ -n $result ]; then
+    if [ -n "$result" ]; then
         echo "git checkout failed"
         exit 1
     fi
@@ -61,8 +55,6 @@ then
     # reset with latest from main
     # this avoids merge conflicts when existing changes are not merged
     git reset --hard origin/main
-else
-    git checkout -b $branch_name
 fi
 
 echo "Running update command $update_command"
