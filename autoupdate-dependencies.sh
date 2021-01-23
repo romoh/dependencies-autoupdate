@@ -50,7 +50,12 @@ then
 
     echo "Check out branch instead" 
     # check out existing branch
-    git checkout $branch_name
+    result=$(git checkout $branch_name 2>&1)
+    if [ -n $result ]; then
+        echo "git checkout failed"
+        exit 1
+    fi
+    
     git pull
 
     # reset with latest from main
