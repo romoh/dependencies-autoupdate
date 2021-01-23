@@ -4,23 +4,14 @@ inputs:
   token:
     description: Token used to send pull requests
     required: true
-  repo:
-    description: Name of the repo
-    required: true
-  path:
-    description: Path to directory to run the update-command
-    required: true
   update-command:
     description: Command to update dependencies and do initial checks
     required: true
-  username:
-    description: Username, if not defined default is used.
-    required: true
-  organization:
-    description: Organization owning the repo. For individuals that will be the username
+  update-path:
+    description: Path to directory to run the update-command. If not provided defaults to root
     required: false
 runs:
   using: 'composite'
   steps:
-     - run: ./autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.repo }} ${{ inputs.update-command }} ${{ inputs.path }} ${{ inputs.username }}
+     - run: ./autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.update-command }} ${{ inputs.update-path }}
        shell: bash
