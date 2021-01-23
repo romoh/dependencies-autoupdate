@@ -6,7 +6,7 @@ dependencies-autoupdate can:
 2. Run a validation step to ensure the update command was successful ie: make, cargo test.. etc
 2. Checks out a branch and creates a pull requests with the updated dependencies on success.
 
-Note: This action was tested with cargo. Further contributions are welcomed.
+The action is language independant. Check the sample [go workflow](https://github.com/romoh/dependencies-autoupdate/blob/main/.github/workflows/autoupdate-dependencies-go.yml) & [rust workflow](https://github.com/romoh/dependencies-autoupdate/blob/main/.github/workflows/autoupdate-dependencies-rust.yml).
 
 # Usage
 '
@@ -19,49 +19,41 @@ jobs:
       uses: actions/checkout@v2
       with:
         persist-credentials: false
-        
-    - name: Install re[po specific requirements
-      run: |
-        apt_dependencies="git curl libssl-dev pkg-config libudev-dev libv4l-dev"
-        echo "Run apt update and apt install the following dependencies: $apt_dependencies"
-        sudo apt update
-        sudo apt install -y $apt_dependencies
-    
+                  
+    - name: Go setup
+      uses: actions/setup-go@v2
+             
     - name: Run auto dependency update 
-      uses: ./.github/actions/auto-update-dependencies
+      uses: romoh/dependencies-autoupdate@main
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
-        repo: "akri"
-        update-command: "'cargo update && cargo test'" 
+        update-command: "'go get -u && go mod tidy && go build'"
+        update-path: "'./test/go'"
         '
-It is recommended to use this action on a [schedule trigger](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule) at certain cadence, but it can be used on other triggers as well. Just note GitHub has limitation on token access from fork repos.
+It is recommended to use this action on a [schedule trigger](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule) at fixed cadence, but it can be used on other triggers as well. Just note GitHub has limitation on default GITHUB_TOKEN access from fork repos.
 
 # Action inputs
-All inputs are optional. If not set, sensible defaults will be used.
 
-Note: If you want pull requests created by this action to trigger an on: push or on: pull_request workflow then you cannot use the default GITHUB_TOKEN. See the documentation here for workarounds.
-
-Name |	Description	| Default
---| --| --|
-token |	GITHUB_TOKEN or a repo scoped Personal Access Token (PAT). | GITHUB_TOKEN
-repo	| The name of the repo. |	N/A
-update-command | The command to update the dependencies and validation commands for validating successful update. } N/A
+Name |	Description	| Required | Default
+--| --| --| --|
+token |	GITHUB_TOKEN or a repo scoped Personal Access Token (PAT). | Yes | N/A
+update-command | The command to update the dependencies and validation commands for validating successful update. ie: 'cargo update && cargo test' or 'go get -u && go mod tidy && go build' | Yes | N/A
+update-path | Path to execute the update command in case the required dependencies update don't exist at the main working directory | No | defaults to working directory
 
 # Action outputs
-- Success: success means that the action completed successfully. If no dependencies updates were observed, the action is completed. If changes were detected, a pull request will be open.
-- Failure: In case of any intermident failure steps, the action will fail.
+- Success: success means that the action completed successfully. If dependency updates were detected, a pull request will be open and action succeeds. Similarily, If no changes were detected, the action succeeds.
+- Failure: In case of any unexpected intermident failure steps, the action will fail. This is not expected to happen. Please report it as a bug.
 
 # Action behavior
-    - The committer name defaults to the GitHub Actions bot user. GitHub <noreply@github.com>
-    - The pull request branch name is fixed and defaults to "autoupdate-dependencies"
-    - Pull request defaults	to the branch checked out in the workflow.
-
 The default behavior of the action is to create a pull request that will be continually updated with new changes until it is merged or closed. Changes are committed and pushed to a fixed-name branch. Any subsequent changes will be committed to the same branch and reflected in the open pull request.
 
-How the action behaves:
 If there are no changes (i.e. no diff exists with the checked-out base branch), no pull request will be created and the action exits silently.
 If a pull request already exists and there are no further changes (i.e. no diff with the current pull request branch) then the action exits silently.
 
+Notes:
+* The committer name is set to the GitHub Actions bot user. GitHub <noreply@github.com>
+* The pull request branch name is fixed and defaults to "automated-dependencies-update".
+* Pull request defaults	to the branch checked out in the workflow.
 
-Future: 
-* Keep the branch up to do in case of non-merged previous code reviews with dependencies update.
+License
+This tool is distributed under the terms of the MIT license. See [LICENSE](https://github.com/romoh/dependencies-autoupdate/blob/main/LICENSE) for details.
