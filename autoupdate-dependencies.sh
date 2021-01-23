@@ -39,12 +39,12 @@ branch_exists4=$(git branch --list automated-dependencies-update 2>&1)
 echo "*****************"
 echo $branch_exists
 [ ! -z "$branch_exists" ] && echo "yes"
-[ -n "$branch_exists"] && echo "yes"
+[ -n "$branch_exists" ] && echo "yes"
 echo $branch_exists4
 echo "*****************"
 
 # branch already exists, previous opened PR was not merged
-if [ ${#branch_exists} == " ]
+if [ ${#branch_exists} == "0" ]
 then
     echo "Branch name $branch_name already exists"
 
