@@ -28,4 +28,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         update-command: "'go get -u && go mod tidy && go build'"
         update-path: "'./test/go'"
-        on-update-command: "./test.sh"
+        on-changes-command: "./test.sh"

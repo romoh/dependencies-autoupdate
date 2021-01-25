@@ -13,11 +13,11 @@ inputs:
   update-path:
     description: Path to directory to run the update-command. If not provided defaults to root
     required: false
-  on-update-command:
-    description: Command to run if updates were detected. This can be version increments or extra checks.
+  on-changes-command:
+    description: Command to run if dependencies update and changes were detected. This can be version increments or extra checks.
     required: false
 runs:
   using: 'composite'
   steps:
-     - run: ${{ github.action_path }}/autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.update-command }} ${{ inputs.update-path }}? ${{ inputs.on-update-command }}?
+     - run: ${{ github.action_path }}/autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.update-command }} ${{ inputs.update-path }}? ${{ inputs.on-changes-command }}?
        shell: bash

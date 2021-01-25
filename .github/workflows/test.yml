@@ -23,4 +23,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         update-command: "'> test.txt'"
         # don't provide update-path as its optional
-        on-update-command: "'echo On update command action'"
+        on-changes-command: "'echo On update command action'"

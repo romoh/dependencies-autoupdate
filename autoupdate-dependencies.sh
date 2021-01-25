@@ -6,12 +6,9 @@ set -e
 token=$1
 update_command=$2
 update_path=$3
-on_update_command=$4
+on_changes_command=$4
 repo=$GITHUB_REPOSITORY #owner and repository: ie: user/repo
 username=$GITHUB_ACTOR
-
-echo $update_path
-echo $on_update_command
 
 branch_name="automated-dependencies-update"
 email="noreply@github.com"
@@ -72,13 +69,16 @@ then
     # format: https://[username]:[token]@github.com/[organization]/[repo].git
     git remote add authenticated "https://$username:$token@github.com/$repo.git"
 
-    # run post update commands, if provided
-    on_update_command_value=${on_update_command%?}
-    echo $on_update_command_value
-    if [ -n "$on_update_command_value" ]; then
+    # execute command to run when changes are deteced, if provided
+    on_changes_command_value=${on_changes_command%?}
+    echo $on_changes_command_value
+    if [ -n "$on_changes_command_value" ]; then
         echo "Run post-update command"
-        eval $on_update_command_value
+        eval $on_changes_command_value
     fi
+
+    # explicitly add all files, git commit -a doesn't add newly added files
+    git add -a
 
     # commit the changes to updated files
     git commit -a -m "Auto-updated dependencies"
