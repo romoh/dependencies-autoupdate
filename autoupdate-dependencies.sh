@@ -6,6 +6,7 @@ set -e
 token=$1
 update_command=$2
 update_path=$3
+on_update_command=$4
 repo=$GITHUB_REPOSITORY #owner and repository: ie: user/repo
 username=$GITHUB_ACTOR
 
@@ -65,6 +66,12 @@ then
 
     # format: https://[username]:[token]@github.com/[organization]/[repo].git
     git remote add authenticated "https://$username:$token@github.com/$repo.git"
+
+    # run post update commands, if provided
+    if [ -n "$on_update_command" ]; then
+        echo "Run post-update command"
+        eval $on_update_command
+    fi
 
     # commit the changes to updated files
     git commit -a -m "Auto-updated dependencies"
