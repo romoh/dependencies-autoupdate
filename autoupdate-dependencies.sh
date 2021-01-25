@@ -10,9 +10,6 @@ on_update_command=$4
 repo=$GITHUB_REPOSITORY #owner and repository: ie: user/repo
 username=$GITHUB_ACTOR
 
-echo "path: ${update_path: -1}"
-echo ${on_update_command: -1}
-
 echo $update_path
 echo $on_update_command
 
@@ -30,7 +27,7 @@ if [ -z "$update_command" ]; then
 fi
 
 # remove optional params markers
-$update_path_value=${update_path: -1}
+$update_path_value=${update_path%?}
 if [ -n "$update_path_value" ]; then
     # if path is set, use that. otherwise default to current working directory
     echo "Change directory to $update_path_value"
@@ -76,7 +73,7 @@ then
     git remote add authenticated "https://$username:$token@github.com/$repo.git"
 
     # run post update commands, if provided
-    $on_update_command_value=${on_update_command: -1}
+    $on_update_command_value=${on_update_command%?}
     if [ -n "$on_update_command_value" ]; then
         echo "Run post-update command"
         eval $on_update_command_value
