@@ -77,8 +77,8 @@ then
         eval $on_changes_command_value
     fi
 
-    # explicitly add all files, git commit -a doesn't add newly added files
-    git add -a
+    # explicitly add all files including untracked
+    git add -A
 
     # commit the changes to updated files
     git commit -a -m "Auto-updated dependencies"
