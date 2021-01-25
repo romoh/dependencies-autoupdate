@@ -10,9 +10,8 @@ on_update_command=$4
 repo=$GITHUB_REPOSITORY #owner and repository: ie: user/repo
 username=$GITHUB_ACTOR
 
-# remove optional params markers
-$update_path=${update_path: -1}
-$on_update_command=${on_update_command: -1}
+echo "path: ${update_path: -1}"
+echo ${on_update_command: -1}
 
 echo $update_path
 echo $on_update_command
@@ -30,10 +29,12 @@ if [ -z "$update_command" ]; then
     exit 1
 fi
 
-if [ -n "$update_path" ]; then
+# remove optional params markers
+$update_path_value=${update_path: -1}
+if [ -n "$update_path_value" ]; then
     # if path is set, use that. otherwise default to current working directory
-    echo "Change directory to $update_path"
-    cd "$update_path"
+    echo "Change directory to $update_path_value"
+    cd "$update_path_value"
 fi
 
 # assumes the repo is already cloned as a prerequisite for running the script
@@ -75,9 +76,10 @@ then
     git remote add authenticated "https://$username:$token@github.com/$repo.git"
 
     # run post update commands, if provided
-    if [ -n "$on_update_command" ]; then
+    $on_update_command_value=${on_update_command: -1}
+    if [ -n "$on_update_command_value" ]; then
         echo "Run post-update command"
-        eval $on_update_command
+        eval $on_update_command_value
     fi
 
     # commit the changes to updated files
