@@ -28,7 +28,7 @@ jobs:
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
         update-command: "'go get -u && go mod tidy && go build'"
-        update-path: "'./test/go'"
+        update-path: "'./test/go'" #optional
 ```
 
 It is recommended to use this action on a [schedule trigger](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule) at a fixed cadence, but it can be used on other triggers as well. Just note GitHub has limitations on default GITHUB_TOKEN access from forks.
@@ -40,6 +40,7 @@ Name |	Description	| Required | Default
 token |	GITHUB_TOKEN or a repo scoped Personal Access Token (PAT). | Yes | N/A
 update-command | Command to update the dependencies and validate the changes. e.g. `cargo update && cargo test` or `go get -u && go mod tidy && go build`. | Yes | N/A
 update-path | Path to execute the update command if different from the main working directory. | No | defaults to working directory
+on-changes-command | Command to execute after updates to dependencies are detected. This will be executed before the pull request is created. e.g. version increment. | No | N/A
 
 # Action outputs
 - Success: Success means that the action completed successfully. If dependency updates were detected, a pull request will be open and action succeeds. Similarily, If no changes were detected, the action succeeds.
