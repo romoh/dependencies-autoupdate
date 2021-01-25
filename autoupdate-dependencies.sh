@@ -10,6 +10,13 @@ on_update_command=$4
 repo=$GITHUB_REPOSITORY #owner and repository: ie: user/repo
 username=$GITHUB_ACTOR
 
+# remove optional params markers
+$update_path=${update_path: -1}
+$on_update_command=${on_update_command: -1}
+
+echo $update_path
+echo $on_update_command
+
 branch_name="automated-dependencies-update"
 email="noreply@github.com"
 
