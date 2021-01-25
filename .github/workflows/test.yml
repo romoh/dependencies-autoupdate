@@ -1,0 +1,32 @@
+name: Test workflow
+
+on:
+  # manual only
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test-github-action:
+    runs-on: ubuntu-latest
+
+    steps:    
+    - name: Checkout the head commit of the branch
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+          
+    - name: Rust tools
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+             
+    - name: Test 
+      uses: romoh/dependencies-autoupdate@main
+      with: 
+        token: ${{ secrets.GITHUB_TOKEN }}
+        update-command: "'> test.txt'"
+        # don't provide update-path as its optional
+        on-update-command: "echo 'On update command'"
+        
