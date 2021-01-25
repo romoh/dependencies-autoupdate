@@ -74,6 +74,7 @@ then
 
     # run post update commands, if provided
     on_update_command_value=${on_update_command%?}
+    echo $on_update_command_value
     if [ -n "$on_update_command_value" ]; then
         echo "Run post-update command"
         eval $on_update_command_value
