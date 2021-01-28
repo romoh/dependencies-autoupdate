@@ -1,5 +1,5 @@
 name: 'autoupdate-dependencies'
-description: 'Automatic dependencies update'
+description: 'Language independent action that automatically updates dependencies and creates PR with the changes.'
 branding:
   icon: 'arrow-up-circle'  
   color: 'green'
