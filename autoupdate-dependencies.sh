@@ -81,10 +81,7 @@ then
     git add -A
 
     # commit the changes to updated files
-    git commit -a -m "Auto-updated dependencies"
-    
-    # add signoff to commits
-    git commit --amend --no-edit --signoff
+    git commit -a -m "Auto-updated dependencies" --signoff
     
     # push the changes
     git push authenticated -f
