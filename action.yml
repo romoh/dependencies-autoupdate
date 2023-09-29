@@ -1,4 +1,4 @@
-name: 'Dependencies Autoupdate'
+name: 'Dependencies Autoupdate with Custom branch'
 description: 'Language agnostic action that automatically updates dependencies and creates PR with the changes. e.g.: go, js, rust, py, ts'
 branding:
   icon: 'arrow-up-circle'  
@@ -19,5 +19,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-     - run: ${{ github.action_path }}/autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.update-command }} ${{ inputs.update-path }}? ${{ inputs.on-changes-command }}?
+     - run: ${{ github.action_path }}/autoupdate-dependencies.sh ${{ inputs.token }} ${{ inputs.update-command }} ${{ inputs.pr-branch }} ${{ inputs.update-path }}? ${{ inputs.on-changes-command }}?
        shell: bash
+

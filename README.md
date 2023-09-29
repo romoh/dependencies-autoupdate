@@ -4,11 +4,12 @@ A GitHub action that automates dependencies update. The action is designed to be
 dependencies-autoupdate can:
 1. Run a dependencies update command ie: npm update, cargo update.. etc
 2. Run a validation step to ensure the update command was successful ie: make, cargo test.. etc
-2. Checks out a branch and creates a pull requests with the updated dependencies on success.
+3. Checks out a branch and creates a pull requests with the updated dependencies on success.
 
-The action is language independant. Check the sample [go workflow](https://github.com/romoh/dependencies-autoupdate/blob/main/.github/workflows/autoupdate-dependencies-go.yml) & [rust workflow](https://github.com/romoh/dependencies-autoupdate/blob/main/.github/workflows/autoupdate-dependencies-rust.yml).
+The action is language independent. Check the sample [go workflow](https://github.com/romoh/dependencies-autoupdate/blob/main/.github/workflows/autoupdate-dependencies-go.yml) & [rust workflow](https://github.com/romoh/dependencies-autoupdate/blob/main/.github/workflows/autoupdate-dependencies-rust.yml).
 
 # Usage
+### Example 1
 ```
 jobs:
   auto-update:
@@ -31,6 +32,37 @@ jobs:
         update-path: "'./test/go'" #optional
 ```
 
+### Example 2, A schedule job to upgrade requirements via Make command
+```bash
+name: Auto update Python dependencies
+on:
+  schedule:
+    # runs monthly At 00:01 on day-of-month 1
+    - cron: '1 0 1 * *'
+  workflow_dispatch:
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the head commit of the branch
+      uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Run auto dependency update
+      uses: emZubair/dependencies-autoupdate@v1.1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        pr-branch: "staging"
+        update-command: "'make update'"
+
+```
+
+Example 2 will create the PR against `staging` branch at the start of each month
 It is recommended to use this action on a [schedule trigger](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule) at a fixed cadence, but it can be used on other triggers as well. Just note GitHub has limitations on default GITHUB_TOKEN access from forks.
 
 # Action inputs
@@ -39,6 +71,7 @@ Name |	Description	| Required | Default
 --| --| --| --|
 token |	GITHUB_TOKEN or a repo scoped Personal Access Token (PAT). | Yes | N/A
 update-command | Command to update the dependencies and validate the changes. e.g. `cargo update && cargo test` or `go get -u && go mod tidy && go build`. | Yes | N/A
+pr-branch | PR branch against which the PR should be created  | No | `main`
 update-path | Path to execute the update command if different from the main working directory. | No | defaults to working directory
 on-changes-command | Command to execute after updates to dependencies are detected. This will be executed before the pull request is created. e.g. version increment. | No | N/A
 
@@ -55,7 +88,7 @@ If a pull request already exists and there are no further changes (i.e. no diff 
 Notes:
 * The committer name is set to the GitHub Actions bot user. GitHub <noreply@github.com>
 * The pull request branch name is fixed and defaults to "automated-dependencies-update".
-* Pull request defaults	to the branch checked out in the workflow.
+* Pull request defaults	to `main` branch when the value for `pr-branch` is not given 
 
 # License
 This tool is distributed under the terms of the MIT license. See [LICENSE](https://github.com/romoh/dependencies-autoupdate/blob/main/LICENSE) for details.
