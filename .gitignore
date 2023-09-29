@@ -1,3 +1,6 @@
 **/test/rust/target/**
 test/rust/*.exe
 test/go/*.exe
+
+
+.idea/*
