@@ -10,6 +10,9 @@ inputs:
   update-command:
     description: Command to update dependencies and do initial checks
     required: true
+  pr-branch:
+    description: PR branch against which the PR should be created, defaults to main
+    required: false
   update-path:
     description: Path to directory to run the update-command. If not provided defaults to root
     required: false

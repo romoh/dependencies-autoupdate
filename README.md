@@ -25,7 +25,7 @@ jobs:
       uses: actions/setup-go@v2
              
     - name: Run auto dependency update 
-      uses: romoh/dependencies-autoupdate@v1
+      uses: emZubair/dependencies-autoupdate@v1.1.1
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
         update-command: "'go get -u && go mod tidy && go build'"
@@ -54,7 +54,7 @@ jobs:
         python-version: '3.8'
 
     - name: Run auto dependency update
-      uses: emZubair/dependencies-autoupdate@v1.1
+      uses: emZubair/dependencies-autoupdate@v1.1.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         pr-branch: "staging"
