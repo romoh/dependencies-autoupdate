@@ -28,6 +28,5 @@ jobs:
       uses: romoh/dependencies-autoupdate@main
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
-        update-command: "'cargo update && cargo test'"
-        update-path: "'./test/rust'"
-        
+        update-command: "cargo update && cargo test"
+        update-path: "./test/rust"

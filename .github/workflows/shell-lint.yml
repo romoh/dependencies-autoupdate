@@ -1,0 +1,65 @@
+name: Shell Script Linting and Validation
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths: [ '**.sh' ]
+  push:
+    branches: [ main ]
+    paths: [ '**.sh' ]
+  workflow_dispatch:
+
+jobs:
+  shell-lint:
+    runs-on: ubuntu-latest
+    name: Lint and validate shell scripts
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Find shell scripts
+      id: find-scripts
+      run: |
+        echo "Finding all .sh files in the repository..."
+        SHELL_SCRIPTS=$(find . -name "*.sh" -type f | tr '\n' ' ')
+        echo "Found scripts: $SHELL_SCRIPTS"
+        echo "scripts=$SHELL_SCRIPTS" >> $GITHUB_OUTPUT
+        if [ -z "$SHELL_SCRIPTS" ]; then
+          echo "No shell scripts found"
+          echo "has_scripts=false" >> $GITHUB_OUTPUT
+        else
+          echo "has_scripts=true" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Run shellcheck
+      if: steps.find-scripts.outputs.has_scripts == 'true'
+      run: |
+        echo "Running shellcheck on all shell scripts..."
+        EXIT_CODE=0
+        for script in ${{ steps.find-scripts.outputs.scripts }}; do
+          echo "Checking $script with shellcheck..."
+          if ! shellcheck "$script"; then
+            echo "❌ Shellcheck failed for $script"
+            EXIT_CODE=1
+          else
+            echo "✅ Shellcheck passed for $script"
+          fi
+        done
+        exit $EXIT_CODE
+
+    - name: Run bash syntax validation
+      if: steps.find-scripts.outputs.has_scripts == 'true'
+      run: |
+        echo "Running bash syntax validation on all shell scripts..."
+        EXIT_CODE=0
+        for script in ${{ steps.find-scripts.outputs.scripts }}; do
+          echo "Validating syntax for $script..."
+          if ! bash -n "$script"; then
+            echo "❌ Syntax validation failed for $script"
+            EXIT_CODE=1
+          else
+            echo "✅ Syntax validation passed for $script"
+          fi
+        done
+        exit $EXIT_CODE
