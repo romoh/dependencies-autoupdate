@@ -1,4 +1,3 @@
----
 name: 'Dependencies Autoupdate'
 description: 'Language agnostic action that automatically updates dependencies and creates PR with the changes. e.g.: go, js, rust, py, ts'
 branding:
