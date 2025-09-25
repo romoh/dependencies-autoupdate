@@ -75,7 +75,7 @@ then
     echo "$on_changes_command"
     if [ -n "$on_changes_command" ]; then
         echo "Run post-update command"
-        eval $on_changes_command
+        eval "$on_changes_command"
     fi
 
     # explicitly add all files including untracked
