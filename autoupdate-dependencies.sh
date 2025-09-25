@@ -28,6 +28,10 @@ fi
 # remove optional params markers
 if [ -n "$update_path" ]; then
     # if path is set, use that. otherwise default to current working directory
+    if [ ! -d "$update_path" ]; then
+        echo "Error: update-path '$update_path' is not a valid directory"
+        exit 1
+    fi
     echo "Change directory to $update_path"
     cd "$update_path"
 fi
