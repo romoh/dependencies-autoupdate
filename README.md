@@ -28,7 +28,7 @@ jobs:
       uses: romoh/dependencies-autoupdate@v1.1
       with: 
         token: ${{ secrets.GITHUB_TOKEN }}
-        update-command: "'go get -u && go mod tidy && go build'"
+        update-command: "go get -u && go mod tidy && go build"
         update-path: "'./test/go'" #optional
 ```
 
@@ -60,7 +60,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         pr-branch: "staging"
-        update-command: "'make update'"
+        update-command: "make update"
 
 ```
 

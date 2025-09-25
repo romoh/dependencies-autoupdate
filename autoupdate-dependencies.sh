@@ -26,11 +26,10 @@ if [ -z "$update_command" ]; then
 fi
 
 # remove optional params markers
-update_path_value=${update_path%?}
-if [ -n "$update_path_value" ]; then
+if [ -n "$update_path" ]; then
     # if path is set, use that. otherwise default to current working directory
-    echo "Change directory to $update_path_value"
-    cd "$update_path_value"
+    echo "Change directory to $update_path"
+    cd "$update_path"
 fi
 
 # assumes the repo is already cloned as a prerequisite for running the script
@@ -43,10 +42,10 @@ branch_exists=$(git branch --list automated-dependencies-update)
 # branch already exists, previous opened PR was not merged
 if [ -z "$branch_exists" ]; then
     # create new branch
-    git checkout -b $branch_name
+    git checkout -b "$branch_name"
 else
     echo "Branch name $branch_name already exists"
-
+    
     # check out existing branch
     echo "Check out branch instead"
     git checkout $branch_name
@@ -54,7 +53,7 @@ else
 
     # reset with latest from $pr_branch
     # this avoids merge conflicts when existing changes are not merged
-    git reset --hard origin/$pr_branch
+    git reset --hard "origin/${pr_branch}"
 fi
 
 echo "Running update command $update_command"
@@ -73,11 +72,10 @@ then
     git remote add authenticated "https://$username:$token@github.com/$repo.git"
 
     # execute command to run when changes are deteced, if provided
-    on_changes_command_value=${on_changes_command%?}
-    echo $on_changes_command_value
-    if [ -n "$on_changes_command_value" ]; then
+    echo "$on_changes_command"
+    if [ -n "$on_changes_command" ]; then
         echo "Run post-update command"
-        eval $on_changes_command_value
+        eval "$on_changes_command"
     fi
 
     # explicitly add all files including untracked
